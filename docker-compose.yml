@@ -24,6 +24,4 @@ unbound:
   - STATISTICS_INTERVAL=0
   - STATISTICS_CUMULATIVE=no
   - EXTENDED_STATISTICS=no
-  - ACCESS_CONTROL_1=0.0.0.0/0 allow
-  - ACCESS_CONTROL_2=0.0.0.0/0 allow
   restart: always
