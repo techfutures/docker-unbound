@@ -20,7 +20,8 @@ HIDE_VERSION=${HIDE_VERSION:-no}
 STATISTICS_INTERVAL=${STATISTICS_INTERVAL:-0}
 STATISTICS_CUMULATIVE=${STATISTICS_CUMULATIVE:-no}
 EXTENDED_STATISTICS=${EXTENDED_STATISTICS:-no}
-
+ACCESS_CONTROL_1=${ACCESS_CONTROL_1:0.0.0.0/0 allow}
+ACCESS_CONTROL_2=${ACCESS_CONTROL_2:0.0.0.0/0 allow}
 
 sed 's/{{DO_IPV6}}/'"${DO_IPV6}"'/' -i /usr/local/etc/unbound/unbound.conf
 sed 's/{{DO_IPV4}}/'"${DO_IPV4}"'/' -i /usr/local/etc/unbound/unbound.conf
@@ -42,5 +43,7 @@ sed 's/{{HIDE_VERSION}}/'"${HIDE_VERSION}"'/' -i /usr/local/etc/unbound/unbound.
 sed 's/{{STATISTICS_INTERVAL}}/'"${STATISTICS_INTERVAL}"'/' -i /usr/local/etc/unbound/unbound.conf
 sed 's/{{STATISTICS_CUMULATIVE}}/'"${STATISTICS_CUMULATIVE}"'/' -i /usr/local/etc/unbound/unbound.conf
 sed 's/{{EXTENDED_STATISTICS}}/'"${EXTENDED_STATISTICS}"'/' -i /usr/local/etc/unbound/unbound.conf
+sed 's/{{ACCESS_CONTROL_1}}/'"${ACCESS_CONTROL_1}"'/' -i /usr/local/etc/unbound/unbound.conf
+sed 's/{{ACCESS_CONTROL_2}}/'"${ACCESS_CONTROL_2}"'/' -i /usr/local/etc/unbound/unbound.conf
 
 exec /usr/local/sbin/unbound -c /usr/local/etc/unbound/unbound.conf -d -v
