@@ -1,7 +1,7 @@
-FROM ubuntu:trusty
-MAINTAINER patrick@oberdorf.net
+FROM ubuntu:bionic
+MAINTAINER agee@techfutures.xyz
 
-ENV VERSION 1.5.8
+ENV VERSION 1.9.6
 
 WORKDIR /usr/local/src/
 ADD assets/sha256checksum sha256checksum
@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y \
 	wget \
 	libssl-dev \
 	libevent-dev \
-	libevent-2.0-5 \
+	libevent-2.1-6 \
 	libexpat1-dev \
+	libexpat1 \
 	dnsutils \
 	&& wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
@@ -42,6 +43,7 @@ RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
 ADD assets/unbound.conf /usr/local/etc/unbound/unbound.conf
+RUN mkdir /usr/local/etc/unbound/conf.d
 RUN chown -R unbound:unbound /usr/local/etc/unbound/
 
 USER unbound
